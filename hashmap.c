@@ -53,36 +53,28 @@ void enlarge(HashMap * map) {
 
 
 HashMap *createMap(long capacity) {
-    HashMap *map = (HashMap *)malloc(sizeof(HashMap));
+     HashMap *map = (HashMap *)malloc(sizeof(HashMap));
 
     if (map == NULL) {
         fprintf(stderr, "Error: No se pudo asignar memoria para el mapa.\n");
         exit(1);
     }
-     
+
+    // Inicializar el tamaño y el índice actual
     map->size = capacity;
     map->current = -1;
 
-    // Asignar memoria para el bloque de casillas
-    map->buckets_block = (Pair *)malloc(sizeof(Pair) * capacity);
-
-    if (map->buckets_block == NULL) {
-        fprintf(stderr, "Error: No se pudo asignar memoria para el bloque de casillas.\n");
-        free(map);
-        exit(1);
-    }
-
+    // Inicializar el arreglo de casillas con punteros nulos
     map->buckets = (Pair **)malloc(sizeof(Pair *) * capacity);
 
     if (map->buckets == NULL) {
         fprintf(stderr, "Error: No se pudo asignar memoria para el arreglo de casillas.\n");
-        free(map->buckets_block);
         free(map);
         exit(1);
     }
 
+    // Inicializar todas las casillas a NULL
     for (int i = 0; i < capacity; i++) {
-        map->buckets[i] = &map->buckets_block[i];
         map->buckets[i] = NULL;
     }
 
