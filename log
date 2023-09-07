@@ -53,3 +53,17 @@ Thu 07 Sep 2023 01:13:23 AM UTC:
  tests:  0|6
 total_score: 0/70
 25d5632
+Thu 07 Sep 2023 01:15:25 AM UTC: 
+ hashmap.c | 19 ++++---------------
+ 1 file changed, 4 insertions(+), 15 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘createMap’:
+hashmap.c:68:21: error: ‘Bucket’ undeclared (first use in this function)
+   68 |     map->buckets = (Bucket **)malloc(sizeof(Bucket *) * capacity);
+      |                     ^~~~~~
+hashmap.c:68:21: note: each undeclared identifier is reported only once for each function it appears in
+hashmap.c:68:30: error: expected expression before ‘)’ token
+   68 |     map->buckets = (Bucket **)malloc(sizeof(Bucket *) * capacity);
+      |                              ^
+Compilation failed
+07323f5
