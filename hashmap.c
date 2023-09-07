@@ -72,18 +72,8 @@ HashMap *createMap(long capacity) {
         exit(1);
     }
 
-    for (int i = 0 ; i < capacity ; i++){
-      map->buckets[i] = (Pair *)malloc(sizeof(Pair));
-
-      if (map->buckets[i] == NULL){
-        fprintf(stderr, "Error: No se pudo asignar memoria para una casilla.\n");
-        for (int j = 0; j < i; j++){
-          free(map->buckets[j]);
-        }
-        free(map->buckets);
-        free(map);
-        exit(1);
-      }
+    for (int i = 0; i < capacity; i++) {
+        map->buckets[i] = NULL;
     }
   return map;
 }
