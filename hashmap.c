@@ -14,7 +14,6 @@ struct HashMap {
     long size; //cantidad de datos/pairs en la tabla
     long capacity; //capacidad de la tabla
     long current; //indice del ultimo dato accedido
-    Pair *buckets_block;
 };
 
 Pair * createPair( char * key,  void * value) {
@@ -53,30 +52,29 @@ void enlarge(HashMap * map) {
 
 
 HashMap *createMap(long capacity) {
-     HashMap *map = (HashMap *)malloc(sizeof(HashMap));
-
+    HashMap* map = (HashMap*)realloc(sizeof(HashMap));
     if (map == NULL) {
-        fprintf(stderr, "Error: No se pudo asignar memoria para el mapa.\n");
-        exit(1);
+        perror("Error al alocar memoria para la tabla de hash");
+        exit(EXIT_FAILURE);
     }
 
-    // Inicializar el tamaño y el índice actual
-    map->size = capacity;
-    map->current = -1;
-
-    // Inicializar el arreglo de casillas con punteros nulos
-    map->buckets = (Pair **)malloc(sizeof(Pair *) * capacity);
+    // Alocar memoria para el arreglo de punteros a pares
+    map->buckets = (Pair**)malloc(sizeof(Pair*) * capacity);
 
     if (map->buckets == NULL) {
-        fprintf(stderr, "Error: No se pudo asignar memoria para el arreglo de casillas.\n");
-        free(map);
-        exit(1);
+        perror("Error al alocar memoria para el arreglo de pares");
+        exit(EXIT_FAILURE);
     }
 
-    // Inicializar todas las casillas a NULL
-    for (int i = 0; i < capacity; i++) {
+    // Inicializar las entradas de la tabla
+    for (long i = 0; i < capacity; i++) {
         map->buckets[i] = NULL;
     }
+
+    // Establecer la capacidad de la tabla y otras propiedades
+    map->capacity = capacity;
+    map->size = 0;
+    map->current = -1;
 
     return map;
 }

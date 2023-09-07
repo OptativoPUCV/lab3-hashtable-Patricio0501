@@ -73,3 +73,28 @@ Thu 07 Sep 2023 01:15:40 AM UTC:
  tests:  0|6
 total_score: 0/70
 ea3596b
+Thu 07 Sep 2023 03:43:49 PM UTC: 
+ hashmap.c | 28 +++++++++++++---------------
+ 1 file changed, 13 insertions(+), 15 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘createMap’:
+hashmap.c:55:38: error: passing argument 1 of ‘realloc’ makes pointer from integer without a cast [-Werror=int-conversion]
+   55 |     HashMap* map = (HashMap*)realloc(sizeof(HashMap));
+      |                                      ^~~~~~~~~~~~~~~
+      |                                      |
+      |                                      long unsigned int
+In file included from test.c:2:
+/nix/store/4pqv2mwdn88h7xvsm7a5zplrd8sxzvw0-glibc-2.35-163-dev/include/stdlib.h:551:29: note: expected ‘void *’ but argument is of type ‘long unsigned int’
+  551 | extern void *realloc (void *__ptr, size_t __size)
+      |                       ~~~~~~^~~~~
+In file included from test.c:4:
+hashmap.c:55:30: error: too few arguments to function ‘realloc’
+   55 |     HashMap* map = (HashMap*)realloc(sizeof(HashMap));
+      |                              ^~~~~~~
+In file included from test.c:2:
+/nix/store/4pqv2mwdn88h7xvsm7a5zplrd8sxzvw0-glibc-2.35-163-dev/include/stdlib.h:551:14: note: declared here
+  551 | extern void *realloc (void *__ptr, size_t __size)
+      |              ^~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+c432d48
