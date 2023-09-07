@@ -1,0 +1,11 @@
+Thu 07 Sep 2023 12:52:08 AM UTC: 
+ hashmap.c | 23 ++++++++++++++++++++++-
+ 1 file changed, 22 insertions(+), 1 deletion(-)
+In file included from test.c:4:
+hashmap.c: In function ‘createMap’:
+hashmap.c:65:18: error: assignment to ‘Pair **’ from incompatible pointer type ‘void **’ [-Werror=incompatible-pointer-types]
+   65 |     map->buckets = (void **)malloc(sizeof(void *) * capacity);
+      |                  ^
+cc1: all warnings being treated as errors
+Compilation failed
+a278350
