@@ -56,19 +56,19 @@ HashMap * createMap(long capacity) {
 
     if (map == NULL) {
         fprintf(stderr, "Error: No se pudo asignar memoria para el mapa.\n");
-        exit(1); 
+        exit(1);
     }
-
+  
     map->size = capacity;
     map->current = -1;
+    map->buckets = (Bucket **)malloc(sizeof(Bucket *) * capacity);
 
-    map->buckets = (void **)malloc(sizeof(void *) * capacity);
-    
     if (map->buckets == NULL) {
         fprintf(stderr, "Error: No se pudo asignar memoria para el arreglo de casillas.\n");
-        free(map); 
-        exit(1);   
+        free(map);
+        exit(1);
     }
+
     for (int i = 0; i < capacity; i++) {
         map->buckets[i] = NULL;
     }
