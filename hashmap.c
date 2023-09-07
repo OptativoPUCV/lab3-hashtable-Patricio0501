@@ -14,6 +14,7 @@ struct HashMap {
     long size; //cantidad de datos/pairs en la tabla
     long capacity; //capacidad de la tabla
     long current; //indice del ultimo dato accedido
+    Pair *buckets_block;
 };
 
 Pair * createPair( char * key,  void * value) {
@@ -51,31 +52,42 @@ void enlarge(HashMap * map) {
 }
 
 
-HashMap * createMap(long capacity) {
+HashMap *createMap(long capacity) {
     HashMap *map = (HashMap *)malloc(sizeof(HashMap));
 
     if (map == NULL) {
         fprintf(stderr, "Error: No se pudo asignar memoria para el mapa.\n");
         exit(1);
     }
-  
+     
     map->size = capacity;
     map->current = -1;
-    map->buckets = (Bucket **)malloc(sizeof(Bucket *) * capacity);
+
+    // Asignar memoria para el bloque de casillas
+    map->buckets_block = (Pair *)malloc(sizeof(Pair) * capacity);
+
+    if (map->buckets_block == NULL) {
+        fprintf(stderr, "Error: No se pudo asignar memoria para el bloque de casillas.\n");
+        free(map);
+        exit(1);
+    }
+
+    map->buckets = (Pair **)malloc(sizeof(Pair *) * capacity);
 
     if (map->buckets == NULL) {
         fprintf(stderr, "Error: No se pudo asignar memoria para el arreglo de casillas.\n");
+        free(map->buckets_block);
         free(map);
         exit(1);
     }
 
     for (int i = 0; i < capacity; i++) {
+        map->buckets[i] = &map->buckets_block[i];
         map->buckets[i] = NULL;
     }
 
     return map;
 }
-
 
 void eraseMap(HashMap * map,  char * key) {    
 
