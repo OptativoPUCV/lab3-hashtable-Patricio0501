@@ -60,7 +60,6 @@ HashMap *createMap(long capacity) {
         exit(1);
     }
 
-    // Inicializar el tamaño y el índice actual
     map->size = capacity;
     map->current = -1;
 
@@ -73,12 +72,20 @@ HashMap *createMap(long capacity) {
         exit(1);
     }
 
-    // Inicializar todas las casillas a NULL
-    for (int i = 0; i < capacity; i++) {
-        map->buckets[i] = NULL;
-    }
+    for (int i = 0 ; i < capacity ; i++){
+      map->buckets[i] = (Pair *)malloc(sizeof(Pair));
 
-    return map;
+      if (map->buckets[i] == NULL){
+        fprintf(stderr, "Error: No se pudo asignar memoria para una casilla.\n");
+        for (int j = 0; j < i; j++){
+          free(map->buckets[j]);
+        }
+        free(map->buckets);
+        free(map);
+        exit(1);
+      }
+    }
+  return map;
 }
 
 void eraseMap(HashMap * map,  char * key) {    
