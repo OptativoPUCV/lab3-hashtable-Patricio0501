@@ -52,7 +52,7 @@ void enlarge(HashMap * map) {
 
 
 HashMap *createMap(long capacity) {
-    HashMap* map = (HashMap*)realloc(sizeof(HashMap));
+    HashMap* map = (HashMap*)malloc(sizeof(HashMap));
     if (map == NULL) {
         perror("Error al alocar memoria para la tabla de hash");
         exit(EXIT_FAILURE);
