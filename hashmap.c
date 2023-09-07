@@ -65,7 +65,7 @@ HashMap *createMap(long capacity) {
     map->current = -1;
 
     // Inicializar el arreglo de casillas con punteros nulos
-    map->buckets = (Bucket **)malloc(sizeof(Bucket *) * capacity);
+    map->buckets = (Pair **)malloc(sizeof(Pair *) * capacity);
 
     if (map->buckets == NULL) {
         fprintf(stderr, "Error: No se pudo asignar memoria para el arreglo de casillas.\n");
