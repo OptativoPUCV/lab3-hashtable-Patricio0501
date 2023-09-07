@@ -40,7 +40,32 @@ int is_equal(void* key1, void* key2){
 
 
 void insertMap(HashMap * map, char * key, void * value) {
+  if (map == NULL && key == NULL) {
+        return; 
+    }
+  
+    long index = map(key, map->capacity);
 
+    while (map->buckets[index] != NULL && map->buckets[index]->key != NULL) {
+        index = (index + 1) % map->capacity;
+    }
+
+    if (map->buckets[index] != NULL && strcmp(map->buckets[index]->key, key) == 0) {
+        return;
+    }
+
+    Pair *newPair = (Pair *)malloc(sizeof(Pair));
+    if (newPair == NULL) {
+        perror("Error al alocar memoria para el nuevo par");
+        exit(EXIT_FAILURE);
+    }
+
+    newPair->key = strdup(key); 
+    newPair->value = value;
+    map->buckets[index] = newPair;
+    map->size++;
+    map->current = index;
+}
 
 }
 

@@ -104,3 +104,20 @@ Thu 07 Sep 2023 03:44:19 PM UTC:
  tests:  1|5
 total_score: 10/70
 aa036d9
+Thu 07 Sep 2023 03:46:46 PM UTC: 
+ hashmap.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+In file included from test.c:4:
+hashmap.c: In function ‘insertMap’:
+hashmap.c:47:18: error: called object ‘map’ is not a function or function pointer
+   47 |     long index = map(key, map->capacity);
+      |                  ^~~
+hashmap.c:42:26: note: declared here
+   42 | void insertMap(HashMap * map, char * key, void * value) {
+      |                ~~~~~~~~~~^~~
+hashmap.c: At top level:
+hashmap.c:70:1: error: expected identifier or ‘(’ before ‘}’ token
+   70 | }
+      | ^
+Compilation failed
+d193072
