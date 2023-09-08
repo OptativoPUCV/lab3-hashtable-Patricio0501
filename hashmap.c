@@ -105,27 +105,17 @@ void eraseMap(HashMap * map,  char * key) {
 }
 
 Pair * searchMap(HashMap * map,  char * key) {   
-    int inicialIndex = hash(key, map->capacity);
-    int currentIndex = inicialIndex;
+    long index = hash(key, map->capacity);
+    struct Pair *currentPair = map->buckets[index];
 
-    do {
-      struct Pair *currentPair = map->array[currentIndex];
+    while (currentPair != NULL) {
+        if (strcmp(currentPair->key, key) == 0) {
+            return currentPair;  
+        }
+        currentPair = currentPair->value; 
+    }
 
-      if(currentPair == NULL){
-        map->current = currentIndex;
-        return NULL;
-      }
-
-      if(strcmp(currentPair->key, key) == 0){
-        map->current = currentIndex;
-        return currentPair;
-      }
-
-      currentIndex = (currentIndex +1) % map->capacity; 
-    }while(currentIndex != inicialIndex);
-
-  map->current = currentIndex;
-  return NULL;
+    return NULL; 
 }
 
 Pair * firstMap(HashMap * map) {
