@@ -116,6 +116,7 @@ Pair * searchMap(HashMap * map,  char * key) {
         currentPair = currentPair->value; 
     }
 
+    map->current = -1;
     return NULL; 
 }
 
