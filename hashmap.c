@@ -81,7 +81,6 @@ HashMap *createMap(long capacity) {
         exit(EXIT_FAILURE);
     }
 
-    // Alocar memoria para el arreglo de punteros a pares
     map->buckets = (Pair**)malloc(sizeof(Pair*) * capacity);
 
     if (map->buckets == NULL) {
@@ -89,12 +88,10 @@ HashMap *createMap(long capacity) {
         exit(EXIT_FAILURE);
     }
 
-    // Inicializar las entradas de la tabla
     for (long i = 0; i < capacity; i++) {
         map->buckets[i] = NULL;
     }
 
-    // Establecer la capacidad de la tabla y otras propiedades
     map->capacity = capacity;
     map->size = 0;
     map->current = -1;
@@ -108,11 +105,11 @@ void eraseMap(HashMap * map,  char * key) {
 }
 
 Pair * searchMap(HashMap * map,  char * key) {   
-    int inicialIndex = hash(key, map->size);
+    int inicialIndex = hash(key, map->capacity);
     int currentIndex = inicialIndex;
 
     do {
-      Pair *currentPair = map->array[currentIndex];
+      struct Pair *currentPair = map->array[currentIndex];
 
       if(currentPair == NULL){
         map->current = currentIndex;
@@ -124,7 +121,7 @@ Pair * searchMap(HashMap * map,  char * key) {
         return currentPair;
       }
 
-      currentIndex = (currentIndex +1) % map->size; 
+      currentIndex = (currentIndex +1) % map->capacity; 
     }while(currentIndex != inicialIndex);
 
   map->current = currentIndex;
