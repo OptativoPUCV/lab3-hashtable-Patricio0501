@@ -158,3 +158,14 @@ hashmap.c:113:9: error: unused variable ‘aux’ [-Werror=unused-variable]
 cc1: all warnings being treated as errors
 Compilation failed
 ac3bfc1
+Fri 08 Sep 2023 11:22:54 PM UTC: 
+ hashmap.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+In file included from test.c:4:
+hashmap.c: In function ‘searchMap’:
+hashmap.c:113:9: error: unused variable ‘aux’ [-Werror=unused-variable]
+  113 |     int aux;
+      |         ^~~
+cc1: all warnings being treated as errors
+Compilation failed
+d4e2e58

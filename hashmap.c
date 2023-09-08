@@ -115,14 +115,14 @@ Pair * searchMap(HashMap * map,  char * key) {
     do {
       Pair *currentPair = map->array[currentIndex];
 
-      if(currentPair == NULL){
+      if(currentPair != NULL){
         map->current = currentIndex;
         return NULL;
       }
 
       if(strcmp(currentPair->key, key) == 0){
         map->current = currentIndex;
-        return currentIndex;
+        return currentPair;
       }
 
       currentIndex = (currentIndex +1) % map->size; 
