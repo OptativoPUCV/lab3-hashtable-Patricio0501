@@ -112,22 +112,19 @@ Pair * searchMap(HashMap * map,  char * key) {
     while (currentPair != NULL) {
         if (strcmp(currentPair->key, key) == 0) {
             map->current = index; 
-            return currentPair;  
+            return currentPair; 
         }
         previousPair = currentPair;
         currentPair = currentPair->value; 
     }
-
-
-    map->current = index;
     struct Pair *newPair = createPair(key, NULL);
-  
     if (previousPair == NULL) {
         map->buckets[index] = newPair;
     } else {
         previousPair->value = newPair;
     }
 
+    map->current = index;
     map->size++;
     return newPair; 
 }
