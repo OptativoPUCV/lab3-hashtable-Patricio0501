@@ -144,3 +144,17 @@ Thu 07 Sep 2023 03:52:16 PM UTC:
  tests:  5|4
 total_score: 30/70
 3f063b5
+Fri 08 Sep 2023 11:22:29 PM UTC: 
+ hashmap.c | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+In file included from test.c:4:
+hashmap.c: In function ‘searchMap’:
+hashmap.c:125:16: error: returning ‘int’ from a function with return type ‘Pair *’ makes pointer from integer without a cast [-Werror=int-conversion]
+  125 |         return currentIndex;
+      |                ^~~~~~~~~~~~
+hashmap.c:113:9: error: unused variable ‘aux’ [-Werror=unused-variable]
+  113 |     int aux;
+      |         ^~~
+cc1: all warnings being treated as errors
+Compilation failed
+ac3bfc1

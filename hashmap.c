@@ -10,7 +10,8 @@ typedef struct HashMap HashMap;
 int enlarge_called=0;
 
 struct HashMap {
-    Pair ** buckets;
+    Pair **buckets;
+    Pair **array;
     long size; //cantidad de datos/pairs en la tabla
     long capacity; //capacidad de la tabla
     long current; //indice del ultimo dato accedido
@@ -107,9 +108,28 @@ void eraseMap(HashMap * map,  char * key) {
 }
 
 Pair * searchMap(HashMap * map,  char * key) {   
+    int inicialIndex = hash(key, map->size);
+    int currentIndex = inicialIndex;
+    int aux;
 
+    do {
+      Pair *currentPair = map->array[currentIndex];
 
-    return NULL;
+      if(currentPair == NULL){
+        map->current = currentIndex;
+        return NULL;
+      }
+
+      if(strcmp(currentPair->key, key) == 0){
+        map->current = currentIndex;
+        return currentIndex;
+      }
+
+      currentIndex = (currentIndex +1) % map->size; 
+    }while(currentIndex != inicialIndex);
+
+  map->current = currentIndex;
+  return NULL;
 }
 
 Pair * firstMap(HashMap * map) {
