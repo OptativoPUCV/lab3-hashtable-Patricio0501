@@ -124,7 +124,7 @@ Pair * searchMap(HashMap * map,  char * key) {
         return currentPair;
       }
 
-      currentIndex = (currentIndex +1) / map->size; 
+      currentIndex = (currentIndex +1) % map->size; 
     }while(currentIndex != inicialIndex);
 
   map->current = currentIndex;
