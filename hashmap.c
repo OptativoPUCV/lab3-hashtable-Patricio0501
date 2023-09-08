@@ -110,7 +110,6 @@ void eraseMap(HashMap * map,  char * key) {
 Pair * searchMap(HashMap * map,  char * key) {   
     int inicialIndex = hash(key, map->size);
     int currentIndex = inicialIndex;
-    int aux;
 
     do {
       Pair *currentPair = map->array[currentIndex];
