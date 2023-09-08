@@ -110,6 +110,7 @@ Pair * searchMap(HashMap * map,  char * key) {
 
     while (currentPair != NULL) {
         if (strcmp(currentPair->key, key) == 0) {
+            map->current = index; 
             return currentPair;  
         }
         currentPair = currentPair->value; 
