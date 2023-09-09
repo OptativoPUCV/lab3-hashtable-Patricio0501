@@ -54,7 +54,7 @@ void insertMap(HashMap * map, char * key, void * value) {
     if (map->buckets[index] == NULL) {
         Pair *newPair = (Pair *)malloc(sizeof(Pair));
         if (newPair == NULL) {
-            perror("Error al alocar memoria para el nuevo par");
+            perror("Error");
             exit(EXIT_FAILURE);
         }
         newPair->key = strdup(key);
