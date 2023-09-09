@@ -105,22 +105,25 @@ void eraseMap(HashMap * map,  char * key) {
 }
 
 Pair * searchMap(HashMap * map,  char * key) {   
+    struct Pair *searchMap(struct HashMap *map, char *key) {
     long index = hash(key, map->capacity);
     struct Pair *currentPair = map->buckets[index];
-    
+
     while (currentPair != NULL) {
         if (is_equal(currentPair->key, key)) {
-            map->current = index; 
-            return currentPair; 
+            map->current = index; // Actualizar current al índice del bucket encontrado
+            return currentPair;  // Se encontró la clave
         }
-        currentPair = currentPair->value; 
+        currentPair = currentPair->next; // Avanzar a la siguiente pareja en la lista enlazada
+
+        if (currentPair == NULL) {
+            break; // Salir del bucle si llegamos al final de la lista enlazada
+        }
     }
-    
-    map->current = -1; 
+
+    map->current = -1; // La clave no se encuentra en el HashMap
     return NULL;
 }
-
-
 
 Pair * firstMap(HashMap * map) {
 
