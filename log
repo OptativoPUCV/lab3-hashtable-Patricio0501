@@ -301,3 +301,9 @@ hashmap.c:116:34: error: ‘struct Pair’ has no member named ‘next’
       |                                  ^~
 Compilation failed
 1214541
+Sat 09 Sep 2023 01:03:35 AM UTC: 
+ hashmap.c | 26 +++++++++++++++++---------
+ 1 file changed, 17 insertions(+), 9 deletions(-)
+ tests:  8|3
+total_score: 40/70
+8e5b778
