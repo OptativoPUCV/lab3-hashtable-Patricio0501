@@ -99,10 +99,22 @@ HashMap *createMap(long capacity) {
     return map;
 }
 
-void eraseMap(HashMap * map,  char * key) {    
+void eraseMap(HashMap * map, char * key) {
+    long index = hash(key, map->capacity);
+    long initialIndex = index;
 
+    do {
+        Pair *currentPair = map->buckets[index];
 
+        if (currentPair == NULL || is_equal(currentPair->key, key)) {
+            currentPair->value = NULL;
+            map->size--;
+            return;
+        }
+        index = (index + 1) % map->capacity;
+    } while (index != initialIndex); 
 }
+
 
 Pair * searchMap(HashMap * map, char * key) {
     long index = hash(key, map->capacity);
@@ -112,22 +124,18 @@ Pair * searchMap(HashMap * map, char * key) {
         Pair *currentPair = map->buckets[index];
 
         if (currentPair == NULL) {
-            // La clave no se encuentra en el bucket actual
-            map->current = -1; // Actualizar current a -1
+            map->current = -1;
             return NULL;
         }
 
         if (is_equal(currentPair->key, key)) {
-            // Se encontró la clave
             map->current = index;
             return currentPair;
         }
 
-        // Avanzar al siguiente índice (arreglo circular)
         index = (index + 1) % map->capacity;
-    } while (index != initialIndex); // Continuar hasta volver al índice inicial
+    } while (index != initialIndex); 
 
-    // Si llegamos aquí, la clave no se encontró en toda la tabla
     map->current = -1;
     return NULL;
 }
