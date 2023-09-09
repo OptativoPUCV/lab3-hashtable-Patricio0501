@@ -105,7 +105,6 @@ void eraseMap(HashMap * map,  char * key) {
 }
 
 Pair * searchMap(HashMap * map,  char * key) {   
-    struct Pair *searchMap(struct HashMap *map, char *key) {
     long index = hash(key, map->capacity);
     struct Pair *currentPair = map->buckets[index];
     
@@ -120,6 +119,7 @@ Pair * searchMap(HashMap * map,  char * key) {
     map->current = -1; 
     return NULL;
 }
+
 
 
 Pair * firstMap(HashMap * map) {
