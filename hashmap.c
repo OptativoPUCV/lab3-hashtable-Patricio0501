@@ -12,7 +12,6 @@ int enlarge_called=0;
 struct HashMap {
     Pair **buckets;
     Pair **array;
-    Pair *next;
     long size; //cantidad de datos/pairs en la tabla
     long capacity; //capacidad de la tabla
     long current; //indice del ultimo dato accedido
@@ -141,9 +140,8 @@ Pair * searchMap(HashMap * map, char * key) {
     return NULL;
 }
 
-
 Pair * firstMap(HashMap * map) {
-    if (map == NULL || map->size == 0) {
+    if (map == NULL && map->size == 0) {
         return NULL; 
     }
 
@@ -159,28 +157,23 @@ Pair * firstMap(HashMap * map) {
 }
 
 Pair * nextMap(HashMap * map) {
-    if (map == NULL || map->current == -1) {
-        return NULL; 
+    if (map == NULL && map->current == -1) {
+        return NULL;
     }
 
-    long currentIndex = map->current;
-    Pair *currentPair = map->buckets[currentIndex];
+    long currentIndex = map->current + 1;
 
-    while (currentPair != NULL) {
-        currentPair = currentPair->next;
+    while (currentIndex < map->capacity) {
+        Pair *currentPair = map->buckets[currentIndex];
+
         if (currentPair != NULL && currentPair->key != NULL) {
+            map->current = currentIndex; 
             return currentPair;
         }
-    }
-
-    for (long i = currentIndex + 1; i < map->capacity; i++) {
-        currentPair = map->buckets[i];
-        if (currentPair != NULL && currentPair->key != NULL) {
-            map->current = i;
-            return currentPair;
-        }
+        currentIndex++;
     }
 
     map->current = -1; 
     return NULL;
 }
+
