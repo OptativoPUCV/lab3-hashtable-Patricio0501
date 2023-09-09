@@ -141,7 +141,7 @@ Pair * searchMap(HashMap * map, char * key) {
 }
 
 Pair * firstMap(HashMap * map) {
-    if (map == NULL && map->size == 0) {
+    if (map == NULL || map->size == 0) {
         return NULL; 
     }
 
@@ -157,7 +157,7 @@ Pair * firstMap(HashMap * map) {
 }
 
 Pair * nextMap(HashMap * map) {
-    if (map == NULL && map->current == -1) {
+    if (map == NULL || map->current == -1) {
         return NULL;
     }
 
