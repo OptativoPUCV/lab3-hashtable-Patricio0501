@@ -291,3 +291,13 @@ test.c:100:6: error: ‘hash_test1’ defined but not used [-Werror=unused-funct
 cc1: all warnings being treated as errors
 Compilation failed
 3052968
+Sat 09 Sep 2023 01:02:05 AM UTC: 
+ hashmap.c | 1 -
+ 1 file changed, 1 deletion(-)
+In file included from test.c:4:
+hashmap.c: In function ‘searchMap’:
+hashmap.c:116:34: error: ‘struct Pair’ has no member named ‘next’
+  116 |         currentPair = currentPair->next; // Avanzar a la siguiente pareja en la lista enlazada
+      |                                  ^~
+Compilation failed
+1214541
